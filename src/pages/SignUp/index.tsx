@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 import {
   View,
@@ -23,6 +25,7 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
 
   return (
@@ -43,14 +46,20 @@ const SignUp: React.FC = () => {
               <Title>Crie sua conta</Title>
             </View>
 
-            <Input name="name" icon="user" placeholder="informe o nome" />
+            <Form ref={formRef} onSubmit={(data: object) => console.log(data)}>
+              <Input name="name" icon="user" placeholder="informe o nome" />
 
-            <Input name="email" icon="mail" placeholder="informe o email" />
-            <Input name="password" icon="lock" placeholder="informe a senha" />
+              <Input name="email" icon="mail" placeholder="informe o email" />
+              <Input
+                name="password"
+                icon="lock"
+                placeholder="informe a senha"
+              />
 
-            <Button onPress={() => console.log('Clicou em cadastrar')}>
-              Cadastrar
-            </Button>
+              <Button onPress={() => formRef.current?.submitForm()}>
+                Cadastrar
+              </Button>
+            </Form>
           </Container>
         </ScrollView>
 
