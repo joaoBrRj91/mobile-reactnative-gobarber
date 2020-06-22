@@ -28,6 +28,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   { name, icon, ...rest },
   ref,
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const inputElementRef = useRef<any>(null);
 
   const { registerField, defaultValue = '', fieldName, error } = useField(name);
@@ -57,6 +58,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
       ref: inputValueRef.current,
       path: 'value',
       // Utilizado quando temos que alterar algum campo mediante o disparo de um evento feito pelo usuario
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setValue(localRef: any, value) {
         inputValueRef.current.value = value;
         // Utilizado para quando queremos alterar um campo de forma dinamica; por exemplo ao selecionar um compobox um campo input é alterado
@@ -71,7 +73,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 
   return (
     <>
-      <Container isFocused={isFocused}>
+      <Container isFocused={isFocused} isErrored={!!error}>
         <Icon
           name={icon}
           size={20}
