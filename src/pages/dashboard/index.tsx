@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <View>
-      <Button title="Sair" onPress={signOut} />
+      <Button title="Sair do app" onPress={signOut} />
     </View>
   );
 };
